@@ -90,7 +90,7 @@ export interface Config {
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
   };
   db: {
-    defaultIDType: string;
+    defaultIDType: number;
   };
   fallbackLocale: null;
   globals: {
@@ -136,7 +136,7 @@ export interface UserAuthOperations {
  * via the `definition` "users".
  */
 export interface User {
-  id: string;
+  id: number;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -161,7 +161,7 @@ export interface User {
  * via the `definition` "media".
  */
 export interface Media {
-  id: string;
+  id: number;
   alt: string;
   updatedAt: string;
   createdAt: string;
@@ -180,7 +180,7 @@ export interface Media {
  * via the `definition` "services".
  */
 export interface Service {
-  id: string;
+  id: number;
   _order?: string | null;
   name: string;
   description: string;
@@ -200,9 +200,9 @@ export interface Service {
  * via the `definition` "gallery".
  */
 export interface Gallery {
-  id: string;
+  id: number;
   _order?: string | null;
-  image: string | Media;
+  image: number | Media;
   /**
    * Rövid leírás a képről (akadálymentesség és SEO).
    */
@@ -215,7 +215,7 @@ export interface Gallery {
  * via the `definition` "submissions".
  */
 export interface Submission {
-  id: string;
+  id: number;
   name: string;
   phone: string;
   email?: string | null;
@@ -229,7 +229,7 @@ export interface Submission {
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
-  id: string;
+  id: number;
   key: string;
   data:
     | {
@@ -246,32 +246,32 @@ export interface PayloadKv {
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
-  id: string;
+  id: number;
   document?:
     | ({
         relationTo: 'users';
-        value: string | User;
+        value: number | User;
       } | null)
     | ({
         relationTo: 'media';
-        value: string | Media;
+        value: number | Media;
       } | null)
     | ({
         relationTo: 'services';
-        value: string | Service;
+        value: number | Service;
       } | null)
     | ({
         relationTo: 'gallery';
-        value: string | Gallery;
+        value: number | Gallery;
       } | null)
     | ({
         relationTo: 'submissions';
-        value: string | Submission;
+        value: number | Submission;
       } | null);
   globalSlug?: string | null;
   user: {
     relationTo: 'users';
-    value: string | User;
+    value: number | User;
   };
   updatedAt: string;
   createdAt: string;
@@ -281,10 +281,10 @@ export interface PayloadLockedDocument {
  * via the `definition` "payload-preferences".
  */
 export interface PayloadPreference {
-  id: string;
+  id: number;
   user: {
     relationTo: 'users';
-    value: string | User;
+    value: number | User;
   };
   key?: string | null;
   value?:
@@ -304,7 +304,7 @@ export interface PayloadPreference {
  * via the `definition` "payload-migrations".
  */
 export interface PayloadMigration {
-  id: string;
+  id: number;
   name?: string | null;
   batch?: number | null;
   updatedAt: string;
@@ -432,7 +432,7 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  * via the `definition` "settings".
  */
 export interface Setting {
-  id: string;
+  id: number;
   companyName: string;
   /**
    * A lábléc cégnév alatt megjelenő rövid szlogen.
@@ -464,7 +464,7 @@ export interface Setting {
  * via the `definition` "hero".
  */
 export interface Hero {
-  id: string;
+  id: number;
   eyebrow?: string | null;
   /**
    * A főcím első sora.
@@ -480,7 +480,7 @@ export interface Hero {
   /**
    * Nagy, álló vagy négyzetes kép a hero szekció jobb oldalára.
    */
-  image?: (string | null) | Media;
+  image?: (number | null) | Media;
   badgeLabel?: string | null;
   badgeValue?: string | null;
   updatedAt?: string | null;
@@ -491,19 +491,19 @@ export interface Hero {
  * via the `definition` "about".
  */
 export interface About {
-  id: string;
+  id: number;
   heading: string;
   paragraph1?: string | null;
   paragraph2?: string | null;
   /**
    * Álló formátumú kép a bolt belsejéről vagy a csapatról.
    */
-  image?: (string | null) | Media;
+  image?: (number | null) | Media;
   badgeNumber?: string | null;
   badgeLabel?: string | null;
   founderName?: string | null;
   founderRole?: string | null;
-  founderImage?: (string | null) | Media;
+  founderImage?: (number | null) | Media;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
