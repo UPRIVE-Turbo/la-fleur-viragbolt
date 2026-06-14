@@ -4,6 +4,8 @@ import type { Service } from './payload-types'
 
 loadEnv()
 
+const resetImages = process.argv.includes('--reset-images')
+
 const services: Array<Pick<Service, 'name' | 'description' | 'price' | 'icon'>> = [
   {
     name: 'Friss Csokrok',
@@ -35,6 +37,35 @@ const services: Array<Pick<Service, 'name' | 'description' | 'price' | 'icon'>> 
   },
 ]
 
+async function clearImages(payload: Payload) {
+  console.log('Képek törlése...')
+
+  let page = 1
+  while (true) {
+    const result = await payload.find({ collection: 'gallery', limit: 100, page })
+    for (const doc of result.docs) {
+      await payload.delete({ collection: 'gallery', id: doc.id })
+    }
+    if (!result.hasNextPage) break
+    page++
+  }
+
+  await payload.updateGlobal({ slug: 'hero', data: { image: null } })
+  await payload.updateGlobal({ slug: 'about', data: { image: null, founderImage: null } })
+
+  page = 1
+  while (true) {
+    const result = await payload.find({ collection: 'media', limit: 100, page })
+    for (const doc of result.docs) {
+      await payload.delete({ collection: 'media', id: doc.id })
+    }
+    if (!result.hasNextPage) break
+    page++
+  }
+
+  console.log('Képek törölve.')
+}
+
 async function seedImageFromUrl(payload: Payload, url: string, alt: string, filename: string) {
   try {
     const response = await fetch(url)
@@ -64,6 +95,10 @@ async function seed() {
   const { default: config } = await import('./payload.config.js')
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })
+
+  if (resetImages) {
+    await clearImages(payload)
+  }
 
   console.log('Beállítások (settings) frissítése...')
   await payload.updateGlobal({
@@ -95,7 +130,7 @@ async function seed() {
 
   console.log('Hero szekció feltöltése...')
   const existingHero = await payload.findGlobal({ slug: 'hero' })
-  if (!existingHero.image) {
+  if (resetImages || !existingHero.image) {
     const heroImageId = await seedImageFromUrl(
       payload,
       'https://images.unsplash.com/photo-1563241527-3004b7be0ffd?q=80&w=1200&auto=format&fit=crop',
@@ -124,7 +159,7 @@ async function seed() {
 
   console.log('Rólunk szekció feltöltése...')
   const existingAbout = await payload.findGlobal({ slug: 'about' })
-  if (!existingAbout.image) {
+  if (resetImages || !existingAbout.image) {
     const aboutImageId = await seedImageFromUrl(
       payload,
       'https://images.unsplash.com/photo-1717607421625-8ee16249293d?fm=jpg&q=60&w=1200&auto=format&fit=crop',
@@ -161,7 +196,7 @@ async function seed() {
 
   console.log('Galéria feltöltése...')
   const existingGallery = await payload.find({ collection: 'gallery', limit: 1 })
-  if (existingGallery.totalDocs === 0) {
+  if (resetImages || existingGallery.totalDocs === 0) {
     const galleryImages = [
       {
         url: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?fm=jpg&q=60&w=1000&auto=format&fit=crop',

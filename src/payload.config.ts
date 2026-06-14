@@ -13,6 +13,7 @@ import { Submissions } from './collections/Submissions'
 import { Settings } from './globals/Settings'
 import { Hero } from './globals/Hero'
 import { About } from './globals/About'
+import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -39,5 +40,13 @@ export default buildConfig({
     migrationDir: './migrations',
   }),
   sharp,
-  plugins: [],
+  plugins: [
+    vercelBlobStorage({
+      enabled: true,
+      collections: {
+        media: true,
+      },
+      token: process.env.BLOB_READ_WRITE_TOKEN || '',
+    }),
+  ],
 })
