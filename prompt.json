@@ -1,0 +1,40 @@
+{
+  "project": {
+    "name": "La Fleur Virágbolt",
+    "slug": "la-fleur-viragbolt",
+    "language": "hu"
+  },
+  "business": {
+    "name": "La Fleur Virágbolt",
+    "industry": "Virágbolt",
+    "city": "Eger",
+    "tier": "Tier 1",
+    "contact": {
+      "phone": null,
+      "email": "lafleurvirag.eger@gmail.com",
+      "address": "Szent János utca 7, Eger",
+      "facebook": "https://www.facebook.com/lafleureger",
+      "instagram": "https://www.instagram.com/gmail.com"
+    }
+  },
+  "design": {
+    "colors": {
+      "primary": "#5A8A5E",
+      "secondary": "#F6F3EE"
+    },
+    "fonts": {
+      "heading": "Lora",
+      "body": "Open Sans"
+    }
+  },
+  "sections": [
+    "hero",
+    "services",
+    "about",
+    "gallery",
+    "booking-form",
+    "contact",
+    "footer"
+  ],
+  "full_prompt": "Készíts egy magyar nyelvű, egyoldalas landing page-et egy virágboltnak:\n\nAZ ÜZLET ADATAI:\n- Név: La Fleur Virágbolt\n- Cím: Szent János utca 7, Eger\n- Email: lafleurvirag.eger@gmail.com\n- Facebook: facebook.com/lafleureger | Instagram, TikTok\n- Nyitvatartás: hétköznap 9–17\n- Szolgáltatások: Vágott virág, csokrok, ajándékok, szezonális termékek\n\nDESIGN:\n- Stílus: Friss, természetes, elegáns\n- Színek: Friss zöld (#5A8A5E) fejlécekhez, púderrózsaszín (#E8C4D0) kiemelésekhez, krém (#F6F3EE) háttérhez, mélyzöld (#2D4A30) szöveghez\n- Betűtípus: Elegáns serif címekhez (pl. Lora), sans-serif szöveghez (pl. Open Sans)\n\nFELÉPÍTÉS (egyetlen görgethető oldal):\n1. Hero szekció: \"La Fleur Virágbolt — Eger\", szlogen (\"Friss virágok, szeretettel kötve\"), CTA: \"Érdeklődjön / Rendeljen\"\n2. Kínálatunk: Csokrok, alkalmi virágok (esküvő, születésnap, névnap), ajándékok, szezonális termékek — rövid leírással\n3. Rólunk: A bolt bemutatkozása, filozófia\n4. Galéria: 6-8 kép placeholder (csokrok, dekorációk)\n5. Rendelés/Kapcsolat űrlap: Név, telefon, email, milyen alkalomra (legördülő), üzenet/kívánság\n6. Elérhetőség: Email, cím, nyitvatartás, Google Maps\n7. Lábléc: Facebook, Instagram, email, cím, © 2026\n\nHANGNEM: Meleg, kedves, természetes.\n\nTECHNIKAI: Mobilbarát, reszponzív, képoptimalizálás."
+}
